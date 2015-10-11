@@ -1,0 +1,8 @@
+
+def write_to_es(es, index, doc_type, body,id=None):
+    rec = es.index(index, doc_type=doc_type, body=body,id=id)
+    return rec
+
+def search_by_lat_lon(es,lat,lon,distance):
+    
+
