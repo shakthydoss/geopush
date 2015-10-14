@@ -15,6 +15,7 @@ es = Elasticsearch([
 def index():
     return jsonify({'Welcome': 'GeoPush'})
 
+
 #method update location of devices. 
 @app.route('/ping', methods=['POST'])
 def ping():
@@ -37,19 +38,6 @@ def push():
     res = es_helper.search_by_lat_lon(es,data['location']['lat'],data['location']['lon'],"1km")
     return jsonify({'status':'200', 'data':res})
 
-
-
-@app.route('/test', methods=['GET'])
-def test():
-    data = {
-            'location':{
-                'lac':'111',
-                'lon':'333'
-                }
-        }
-    es.index('text','c2c',body=data,id='123')
-    #es.update(index = 'text', doc_type ='c2c', body=data,id='123')
-    return jsonify({'status':200})
 
 def getcts():
     return int(round(time.time() * 1000))

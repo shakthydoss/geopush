@@ -12,10 +12,10 @@ def search_by_lat_lon(es,lat,lon,distance):
                     },
                     "filter": {
                         "geo_distance": {
-                            "distance": "1km",
+                            "distance": distance,
                             "location": {
-                                "lat": 13.153412,
-                                "lon": 79.897104
+                                "lat": lat,
+                                "lon": lon
                                  }
                             }
                         }
