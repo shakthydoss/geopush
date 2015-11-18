@@ -6,17 +6,16 @@ import es_helper
 from flask import request
 
 app = Flask(__name__)
-
 es = Elasticsearch([
     'localhost:9200'
 ])
 
+#this will be default method
 @app.route('/', methods=['GET'])
 def index():
     return jsonify({'Welcome': 'GeoPush'})
 
-
-#method update location of devices. 
+#method update location of devices.
 @app.route('/ping', methods=['POST'])
 def ping():
     data = request.json
@@ -27,12 +26,13 @@ def ping():
     return jsonify({'status':200})
 
 
+#method push the message to near devices.
 @app.route('/push', methods=['POST'])
 def push():
     data = request.json
     data['@timestamp']=getcts()
     print data
-    #find city by lan and lon 
+    #find city by lan and lon
     location = 'chennai'
     es_helper.write_to_es(es,'data',location,data)
     res = es_helper.search_by_lat_lon(es,data['location']['lat'],data['location']['lon'],"1km")

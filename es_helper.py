@@ -16,8 +16,6 @@ def search_by_lat_lon(es,lat,lon,distance):
                             "location": {
                                 "lat": lat,
                                 "lon": lon
-                                 }
-                            }
                         }
                     }
                 }
